@@ -13,7 +13,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-     <link rel="icon" type="image/x-icon" href="./assets/images/logohe.png">
+  <link rel="icon" type="image/x-icon" href="./assets/images/submark.png">
 
     <!-- Add these script tags in the head section of booking.html -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
@@ -256,6 +256,41 @@
                                     </div>
                                 </div>
 
+                                <!-- Labor Add-ons -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Labor Add-ons (Optional)</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input labor-option" type="checkbox" value="108" id="cleaner1" name="laborOption">
+                                                <label class="form-check-label" for="cleaner1">
+                                                    1 Cleaner - ₱108.00
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input labor-option" type="checkbox" value="216" id="cleaner2" name="laborOption">
+                                                <label class="form-check-label" for="cleaner2">
+                                                    2 Cleaners - ₱216.00
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input labor-option" type="checkbox" value="324" id="cleaner3" name="laborOption">
+                                                <label class="form-check-label" for="cleaner3">
+                                                    3 Cleaners - ₱324.00
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input labor-option" type="checkbox" value="432" id="cleaner4" name="laborOption">
+                                                <label class="form-check-label" for="cleaner4">
+                                                    4 Cleaners - ₱432.00
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Customer Information -->
                                 <div class="mb-4">
                                     <h4 class="mb-3">Your Information</h4>
@@ -334,6 +369,14 @@
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Equipment Add-ons:</span>
                                         <span id="equipmentFee">₱0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Labor Add-ons:</span>
+                                        <span id="laborFee">₱0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Transportation Fee:</span>
+                                        <span id="transportationFee">₱0.00</span>
                                     </div>
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Discount:</span>
@@ -534,7 +577,7 @@
         });
 
         // Price calculation function
-        function calculatePrice() {
+       function calculatePrice() {
             const serviceSelect = document.getElementById('serviceType');
             const frequencySelect = document.getElementById('serviceFrequency');
             
@@ -546,12 +589,19 @@
             
             // Calculate equipment fees
             let equipmentTotal = 0;
-            const equipmentCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked:not([name="transportation"]):not([id="agreeTerms"])');
+            const equipmentCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked:not([name="transportation"]):not([name="laborOption"]):not([id="agreeTerms"])');
             equipmentCheckboxes.forEach(checkbox => {
                 if (checkbox.value) {
                     equipmentTotal += parseFloat(checkbox.value) || 0;
                 }
             });
+            
+            // Calculate labor fees (only one can be selected)
+            let laborTotal = 0;
+            const selectedLaborOption = document.querySelector('input[name="laborOption"]:checked');
+            if (selectedLaborOption) {
+                laborTotal = parseFloat(selectedLaborOption.value) || 0;
+            }
             
             // Calculate transportation fee
             let transportationFee = 0;
@@ -561,14 +611,31 @@
             }
             
             // Calculate total
-            const totalAmount = discountedServicePrice + equipmentTotal + transportationFee;
+            const totalAmount = discountedServicePrice + equipmentTotal + laborTotal + transportationFee;
             
             // Update the display
             document.getElementById('serviceFee').textContent = '₱' + servicePrice.toFixed(2);
-            document.getElementById('equipmentFee').textContent = '₱' + (equipmentTotal + transportationFee).toFixed(2);
+            document.getElementById('equipmentFee').textContent = '₱' + equipmentTotal.toFixed(2);
+            document.getElementById('laborFee').textContent = '₱' + laborTotal.toFixed(2);
+            document.getElementById('transportationFee').textContent = '₱' + transportationFee.toFixed(2);
             document.getElementById('discountAmount').textContent = '-₱' + discountAmount.toFixed(2);
             document.getElementById('totalAmount').textContent = '₱' + totalAmount.toFixed(2);
         }
+
+        // Make labor add-ons behave like radio buttons (only one selectable)
+        document.querySelectorAll('.labor-option').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    // Uncheck all other labor options
+                    document.querySelectorAll('.labor-option').forEach(otherCheckbox => {
+                        if (otherCheckbox !== this) {
+                            otherCheckbox.checked = false;
+                        }
+                    });
+                }
+                calculatePrice();
+            });
+        });
 
         // Add event listeners for price calculation
         document.getElementById('serviceType').addEventListener('change', calculatePrice);
@@ -592,6 +659,27 @@
         document.getElementById('confirmationModal').addEventListener('hidden.bs.modal', function () {
             // Clear any remaining validation styles/messages after successful booking
             document.getElementById('bookingForm').classList.remove('was-validated');
+            
+            // Explicitly reset all checkboxes and selects
+            document.getElementById('bookingForm').reset();
+            document.querySelectorAll('input[name="transportation"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.querySelectorAll('input[name="laborOption"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Reset service type to default
+            document.getElementById('serviceType').selectedIndex = 0;
+            document.getElementById('serviceFrequency').selectedIndex = 0;
+            
+            // Reset price display
+            document.getElementById('serviceFee').textContent = '₱0.00';
+            document.getElementById('equipmentFee').textContent = '₱0.00';
+            document.getElementById('laborFee').textContent = '₱0.00';
+            document.getElementById('transportationFee').textContent = '₱0.00';
+            document.getElementById('discountAmount').textContent = '₱0.00';
+            document.getElementById('totalAmount').textContent = '₱0.00';
         });
 
         // Form submission handler
@@ -640,11 +728,25 @@
             this.reset();
             this.classList.remove('was-validated');
             
+            // Explicitly uncheck all transportation and labor options
+            document.querySelectorAll('input[name="transportation"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.querySelectorAll('input[name="laborOption"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
             // Reset price display
             document.getElementById('serviceFee').textContent = '₱0.00';
             document.getElementById('equipmentFee').textContent = '₱0.00';
+            document.getElementById('laborFee').textContent = '₱0.00';
+            document.getElementById('transportationFee').textContent = '₱0.00';
             document.getElementById('discountAmount').textContent = '₱0.00';
             document.getElementById('totalAmount').textContent = '₱0.00';
+            
+            // Reset service type to default
+            document.getElementById('serviceType').selectedIndex = 0;
+            document.getElementById('serviceFrequency').selectedIndex = 0;
         });
 
         // Initialize price calculation on page load
