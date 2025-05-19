@@ -17,6 +17,7 @@ body {
     color: var(--text-color);
     line-height: 1.7;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -87,6 +88,7 @@ a {
     background-color: transparent;
     padding: 1rem 0;
     transition: var(--transition);
+    background-color: #212529;
 }
 
 .navbar.scrolled {
@@ -99,7 +101,7 @@ a {
     display: flex;
     flex-direction: column;
     font-weight: 700;
-    color: black;
+    color: white;
     line-height: 1.2;
 }
 
@@ -113,7 +115,7 @@ a {
 }
 
 .navbar-nav .nav-link {
-    color: black;
+    color: white;
     font-weight: 500;
     padding: 0.5rem 1rem;
     margin: 0 0.2rem;
@@ -698,7 +700,7 @@ a {
 }
 
 .team-image {
-    height: 250px;
+    height: 180px; /* Reduced from 250px */
     overflow: hidden;
 }
 
@@ -709,17 +711,17 @@ a {
 }
 
 .team-info {
-    padding: 1.5rem;
+    padding: 1rem; /* Reduced from 1.5rem */
     text-align: center;
 }
 
 .team-info h4 {
     margin-bottom: 0.5rem;
+    font-size: 1.1rem; /* Add this line */
 }
 
 .team-info p {
-    color: var(--gray-color);
-    margin-bottom: 1rem;
+    font-size: 0.95rem; /* Add this line */
 }
 
 .team-social {

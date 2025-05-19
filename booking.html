@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Now - Dirt Busters Cleaning Services</title>
+    <title>Book a Service | Dirt Busters Cleaning Services</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -12,13 +12,22 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add these script tags in the head section of booking.html -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS with your user ID
+            emailjs.init("YOUR_USER_ID"); // Replace with your actual EmailJS user ID
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="" alt="">
+                <span class="brand-name">Dirt Busters</span>
+                <span class="brand-tagline">Cleaning Services</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,222 +58,364 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>Book Your Cleaning Service</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb justify-content-center">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Book Now</li>
-                </ol>
-            </nav>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Book a Service</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Book Now</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Booking Form Section -->
-    <section class="booking-section">
+    <!-- Booking Form -->
+    <section class="booking-form py-5">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="booking-container">
-                        <div class="section-header">
-                            <h2>Schedule Your Cleaning</h2>
-                            <p>Fill out the form below to book your cleaning service</p>
-                        </div>
-                        <form id="bookingForm" class="needs-validation" novalidate>
-                            <!-- Personal Information -->
-                            <div class="mb-4">
-                                <h4>Personal Information</h4>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="firstName" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your first name.
+                    <div class="card shadow">
+                        <div class="card-body p-5">
+                            <h2 class="text-center mb-4">Service Booking Form</h2>
+                            <form id="bookingForm" novalidate>
+                                <!-- Service Selection -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Service Details</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="serviceType" class="form-label">Service Type*</label>
+                                            <select class="form-select" id="serviceType" required>
+                                                <option value="" selected disabled>Select a service</option>
+                                                <option value="1211">Residential Cleaning (10-60 sqm) - ₱1,211.00</option>
+                                                <option value="1713">Residential Cleaning (61-80 sqm) - ₱1,713.00</option>
+                                                <option value="2356">Residential Cleaning (81-100 sqm) - ₱2,356.00</option>
+                                                <option value="1680">Deep Cleaning (10-80 sqm) - ₱1,680.00</option>
+                                                <option value="2236">Deep Cleaning (81-100 sqm) - ₱2,236.00</option>
+                                                <option value="2932">Deep Cleaning (101-120 sqm) - ₱2,932.00</option>
+                                                <option value="1402">Commercial Cleaning (10-200 sqm) - ₱1,402.00</option>
+                                                <option value="2451">Commercial Cleaning (201-350 sqm) - ₱2,451.00</option>
+                                                <option value="3733">Commercial Cleaning (351-500 sqm) - ₱3,733.00</option>
+                                                <option value="1387">Move-in/Move-out (10-100 sqm) - ₱1,387.00</option>
+                                                <option value="1993">Move-in/Move-out (101-130 sqm) - ₱1,993.00</option>
+                                                <option value="2456">Move-in/Move-out (131-150 sqm) - ₱2,456.00</option>
+                                                <option value="1290">Airbnb Cleaning (10-50 sqm) - ₱1,290.00</option>
+                                                <option value="1786">Airbnb Cleaning (51-65 sqm) - ₱1,786.00</option>
+                                                <option value="2352">Airbnb Cleaning (66-80 sqm) - ₱2,352.00</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a service type.
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="lastName" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your last name.
+                                        <div class="col-md-6">
+                                            <label for="serviceDate" class="form-label">Preferred Date*</label>
+                                            <input type="date" class="form-control" id="serviceDate" required>
+                                            <div class="invalid-feedback">
+                                                Please select a date.
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                        <div class="invalid-feedback">
-                                            Please provide a valid email address.
+                                        <div class="col-md-6">
+                                            <label for="serviceTime" class="form-label">Preferred Time*</label>
+                                            <select class="form-select" id="serviceTime" required>
+                                                <option value="" selected disabled>Select time</option>
+                                                <option value="8:00 AM">8:00 AM</option>
+                                                <option value="9:00 AM">9:00 AM</option>
+                                                <option value="10:00 AM">10:00 AM</option>
+                                                <option value="11:00 AM">11:00 AM</option>
+                                                <option value="12:00 PM">12:00 PM</option>
+                                                <option value="1:00 PM">1:00 PM</option>
+                                                <option value="2:00 PM">2:00 PM</option>
+                                                <option value="3:00 PM">3:00 PM</option>
+                                                <option value="4:00 PM">4:00 PM</option>
+                                                <option value="5:00 PM">5:00 PM</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a time.
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your phone number.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Service Details -->
-                            <div class="mb-4">
-                                <h4>Service Details</h4>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="serviceType" class="form-label">Type of Service</label>
-                                        <select class="form-select" id="serviceType" required>
-                                            <option value="" selected disabled>Choose a service</option>
-                                            <option value="1200">Residential Cleaning (₱1,200)</option>
-                                            <option value="2000">Deep Cleaning (₱2,000)</option>
-                                            <option value="1800">Commercial Cleaning (₱1,800)</option>
-                                            <option value="2500">Move-in/Move-out Cleaning (₱2,500)</option>
-                                            <option value="1500">Airbnb Cleaning (₱1,500)</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a service type.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="serviceDuration" class="form-label">Property Size</label>
-                                        <select class="form-select" id="serviceDuration" required>
-                                            <option value="" selected disabled>Choose property size</option>
-                                            <option value="0.8">Small (< 50 sq.m) - 20% Off</option>
-                                            <option value="1">Medium (50-100 sq.m) - Standard</option>
-                                            <option value="1.3">Large (100-150 sq.m) - +30%</option>
-                                            <option value="1.6">Extra Large (> 150 sq.m) - +60%</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select your property size.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="serviceDate" class="form-label">Service Date</label>
-                                        <input type="date" class="form-control" id="serviceDate" required>
-                                        <div class="invalid-feedback">
-                                            Please select a date.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="serviceTime" class="form-label">Preferred Time</label>
-                                        <select class="form-select" id="serviceTime" required>
-                                            <option value="" selected disabled>Choose a time</option>
-                                            <option value="morning">Morning (8:00 AM - 12:00 PM)</option>
-                                            <option value="afternoon">Afternoon (1:00 PM - 5:00 PM)</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please select a preferred time.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="serviceFrequency" class="form-label">Service Frequency</label>
-                                        <select class="form-select" id="serviceFrequency">
-                                            <option value="1" selected>One-time Service</option>
-                                            <option value="0.9">Weekly (10% Discount)</option>
-                                            <option value="0.95">Bi-weekly (5% Discount)</option>
-                                            <option value="0.98">Monthly (2% Discount)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Address Information -->
-                            <div class="mb-4">
-                                <h4>Address Information</h4>
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label for="address" class="form-label">Street Address</label>
-                                        <input type="text" class="form-control" id="address" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your address.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="city" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your city.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="province" class="form-label">Province</label>
-                                        <input type="text" class="form-control" id="province" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your province.
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="zipCode" class="form-label">Zip Code</label>
-                                        <input type="text" class="form-control" id="zipCode" required>
-                                        <div class="invalid-feedback">
-                                            Please provide your zip code.
+                                        <div class="col-md-6">
+                                            <label for="serviceFrequency" class="form-label">Service Frequency</label>
+                                            <select class="form-select" id="serviceFrequency">
+                                                <option value="1" selected>One-time</option>
+                                                <option value="0.95">Weekly (5% discount)</option>
+                                                <option value="0.9">Bi-weekly (10% discount)</option>
+                                                <option value="0.85">Monthly (15% discount)</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Additional Information -->
-                            <div class="mb-4">
-                                <h4>Additional Information</h4>
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <label for="specialInstructions" class="form-label">Special Instructions (Optional)</label>
-                                        <textarea class="form-control" id="specialInstructions" rows="3"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="petPresent">
-                                            <label class="form-check-label" for="petPresent">
-                                                Pets are present at the property
-                                            </label>
+                                <!-- Transportation Add-on -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Transportation</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="150" id="transport1">
+                                                <label class="form-check-label" for="transport1">
+                                                    1–5 km - ₱150
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="200" id="transport2">
+                                                <label class="form-check-label" for="transport2">
+                                                    6–10 km - ₱200
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="250" id="transport3">
+                                                <label class="form-check-label" for="transport3">
+                                                    11–15 km - ₱250
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="parkingAvailable">
-                                            <label class="form-check-label" for="parkingAvailable">
-                                                Parking is available at the property
-                                            </label>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="300" id="transport4">
+                                                <label class="form-check-label" for="transport4">
+                                                    16–20 km - ₱300
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="350" id="transport5">
+                                                <label class="form-check-label" for="transport5">
+                                                    21–25 km - ₱350
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="transportation" value="400" id="transport6">
+                                                <label class="form-check-label" for="transport6">
+                                                    26–30 km - ₱400
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="text-end">
-                                <button type="submit" class="btn btn-primary btn-lg">Book Now</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="booking-summary">
-                        <h3 class="mb-4">Booking Summary</h3>
-                        <div class="summary-item">
-                            <span>Service:</span>
-                            <span id="serviceSummary">Not selected</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Property Size:</span>
-                            <span id="sizeSummary">Not selected</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Date & Time:</span>
-                            <span id="dateSummary">Not selected</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Frequency:</span>
-                            <span id="frequencySummary">One-time Service</span>
-                        </div>
-                        <div class="summary-item summary-total">
-                            <span>Total:</span>
-                            <span id="totalPrice">₱0.00</span>
-                        </div>
-                        <div class="mt-4">
-                            <p class="small text-muted">* Final price may vary based on additional services or property conditions determined during on-site assessment.</p>
+                                <!-- Equipment Add-ons -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Equipment Add-ons (Optional)</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="27.50" id="vacuumCleaner">
+                                                <label class="form-check-label" for="vacuumCleaner">
+                                                    Vacuum Cleaner (Dry) - ₱27.50
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="84.80" id="steamCleaner">
+                                                <label class="form-check-label" for="steamCleaner">
+                                                    Steam Cleaner - ₱84.80
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="47.87" id="floorPolisher">
+                                                <label class="form-check-label" for="floorPolisher">
+                                                    Floor Polisher - ₱47.87
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="9.57" id="foggingMachine">
+                                                <label class="form-check-label" for="foggingMachine">
+                                                    Portable Fogging/Disinfectant Machine - ₱9.57
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="16.00" id="ladder">
+                                                <label class="form-check-label" for="ladder">
+                                                    Ladder / Step Stool - ₱16.00
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="7.28" id="pressureWasher">
+                                                <label class="form-check-label" for="pressureWasher">
+                                                    Pressure Washer - ₱7.28
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="17.49" id="carpetCleaner">
+                                                <label class="form-check-label" for="carpetCleaner">
+                                                    Carpet Cleaner - ₱17.49
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="25.55" id="upholsteryCleaner">
+                                                <label class="form-check-label" for="upholsteryCleaner">
+                                                    Upholstery Cleaner - ₱25.55
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Customer Information -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Your Information</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="firstName" class="form-label">First Name*</label>
+                                            <input type="text" class="form-control" id="firstName" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your first name.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="lastName" class="form-label">Last Name*</label>
+                                            <input type="text" class="form-control" id="lastName" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your last name.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Email*</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid email.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="phone" class="form-label">Phone Number*</label>
+                                            <input type="tel" class="form-control" id="phone" required>
+                                            <div class="invalid-feedback">
+                                                Please provide your phone number.
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="address" class="form-label">Address*</label>
+                                            <textarea class="form-control" id="address" rows="2" required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please provide your address.
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="specialInstructions" class="form-label">Special Instructions</label>
+                                            <textarea class="form-control" id="specialInstructions" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Payment Information -->
+                                <div class="mb-4">
+                                    <h4 class="mb-3">Payment Information</h4>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="paymentMethod" class="form-label">Payment Method*</label>
+                                            <select class="form-select" id="paymentMethod" required>
+                                                <option value="" selected disabled>Select payment method</option>
+                                                <option value="cash">Cash on Service</option>
+                                                <option value="gcash">GCash</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a payment method.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="promoCode" class="form-label">Promo Code</label>
+                                            <input type="text" class="form-control" id="promoCode">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Price Summary -->
+                                <div class="mb-4 p-3 bg-light rounded">
+                                    <h4 class="mb-3">Price Summary</h4>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Service Fee:</span>
+                                        <span id="serviceFee">₱0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Equipment Add-ons:</span>
+                                        <span id="equipmentFee">₱0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Discount:</span>
+                                        <span id="discountAmount">₱0.00</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total Amount:</span>
+                                        <span id="totalAmount">₱0.00</span>
+                                    </div>
+                                </div>
+
+                                <!-- Terms and Submit -->
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="agreeTerms" required>
+                                        <label class="form-check-label" for="agreeTerms">
+                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>*
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree before submitting.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">Submit Booking</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Booking Policy</h6>
+                    <p>All bookings require at least 24 hours notice. Same-day bookings are subject to availability and may incur an additional fee.</p>
+                    
+                    <h6>Cancellation Policy</h6>
+                    <p>Cancellations made more than 24 hours before the scheduled service will receive a full refund. Cancellations made within 24 hours will be charged 50% of the service fee.</p>
+                    
+                    <h6>Rescheduling</h6>
+                    <p>Rescheduling requests made more than 24 hours before the service will be accommodated at no charge. Requests made within 24 hours may incur a rescheduling fee.</p>
+                    
+                    <h6>Payment</h6>
+                    <p>Full payment is due at the time of service unless other arrangements have been made in advance.</p>
+                    
+                    <h6>Satisfaction Guarantee</h6>
+                    <p>If you're not satisfied with our service, we'll return to re-clean the area at no additional cost within 24 hours of the original service.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Booking Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Thank you for your booking! We've received your request and will contact you shortly to confirm your appointment.</p>
+                    <p>A confirmation email has been sent to <span id="confirmationEmail"></span> with your booking details.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer py-5">
@@ -277,10 +428,7 @@
                     </div>
                     <p>We provide top-quality cleaning services for homes and businesses. Our team of professionals is dedicated to making your space spotless.</p>
                     <div class="social-links mt-3">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61576062496159" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -308,19 +456,19 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <p>123 Cleaning St., Metro Manila, Philippines</p>
+                            <p>10 Crisanto M. De Los Reyes Ave, Tagaytay, Cavite</p>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
-                            <p>+63 912 345 6789</p>
+                            <p>+63-966-486-9537</p>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <p>info@dirtbusters.com</p>
+                            <p>dirtbustercleaningservices2025@gmail.com</p>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>
-                            <p>Mon-Sat: 8:00 AM - 6:00 PM</p>
+                            <p>Mon-Sat: 8:00 AM - 7:00 PM</p>
                         </div>
                     </div>
                 </div>
@@ -329,12 +477,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p class="copyright">&copy; 2025 Dirt Busters Cleaning Services. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <ul class="footer-bottom-links">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms of Service</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -345,61 +487,165 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="./assets/js/script.js"></script>
-    <!-- Booking JS -->
+    
     <script>
+        // Function to handle URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // When the page loads, check for service parameter and pre-select the service
         document.addEventListener('DOMContentLoaded', function() {
-            // Update summary when form elements change
-            const serviceSelect = document.getElementById('serviceType');
-            const sizeSelect = document.getElementById('serviceDuration');
-            const dateInput = document.getElementById('serviceDate');
-            const timeSelect = document.getElementById('serviceTime');
-            const frequencySelect = document.getElementById('serviceFrequency');
-            
-            // Summary elements
-            const serviceSummary = document.getElementById('serviceSummary');
-            const sizeSummary = document.getElementById('sizeSummary');
-            const dateSummary = document.getElementById('dateSummary');
-            const frequencySummary = document.getElementById('frequencySummary');
-            
-            function updateSummary() {
-                // Update service
-                if (serviceSelect.selectedIndex > 0) {
-                    serviceSummary.textContent = serviceSelect.options[serviceSelect.selectedIndex].text;
-                } else {
-                    serviceSummary.textContent = 'Not selected';
+            const serviceParam = getUrlParameter('service');
+            if (serviceParam) {
+                const serviceSelect = document.getElementById('serviceType');
+                for (let i = 0; i < serviceSelect.options.length; i++) {
+                    if (serviceSelect.options[i].text.includes(serviceParam)) {
+                        serviceSelect.selectedIndex = i;
+                        break;
+                    }
                 }
                 
-                // Update size
-                if (sizeSelect.selectedIndex > 0) {
-                    sizeSummary.textContent = sizeSelect.options[sizeSelect.selectedIndex].text;
-                } else {
-                    sizeSummary.textContent = 'Not selected';
-                }
-                
-                // Update date and time
-                if (dateInput.value && timeSelect.selectedIndex > 0) {
-                    const formattedDate = new Date(dateInput.value).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    dateSummary.textContent = `${formattedDate}, ${timeSelect.options[timeSelect.selectedIndex].text}`;
-                } else {
-                    dateSummary.textContent = 'Not selected';
-                }
-                
-                // Update frequency
-                frequencySummary.textContent = frequencySelect.options[frequencySelect.selectedIndex].text;
+                // Trigger the price calculation
+                calculatePrice();
             }
             
-            // Add event listeners
-            serviceSelect.addEventListener('change', updateSummary);
-            sizeSelect.addEventListener('change', updateSummary);
-            dateInput.addEventListener('change', updateSummary);
-            timeSelect.addEventListener('change', updateSummary);
-            frequencySelect.addEventListener('change', updateSummary);
+            // Convert transportation checkboxes to radio buttons behavior
+            const transportCheckboxes = document.querySelectorAll('input[name="transportation"]');
+            transportCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Uncheck all other transportation options
+                        transportCheckboxes.forEach(cb => {
+                            if (cb !== this) {
+                                cb.checked = false;
+                            }
+                        });
+                    }
+                    calculatePrice();
+                });
+            });
         });
+
+        // Price calculation function
+        function calculatePrice() {
+            const serviceSelect = document.getElementById('serviceType');
+            const frequencySelect = document.getElementById('serviceFrequency');
+            
+            // Calculate service fee
+            const servicePrice = parseFloat(serviceSelect.value) || 0;
+            const frequencyDiscount = parseFloat(frequencySelect.value) || 1;
+            const discountedServicePrice = servicePrice * frequencyDiscount;
+            const discountAmount = servicePrice - discountedServicePrice;
+            
+            // Calculate equipment fees
+            let equipmentTotal = 0;
+            const equipmentCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked:not([name="transportation"]):not([id="agreeTerms"])');
+            equipmentCheckboxes.forEach(checkbox => {
+                if (checkbox.value) {
+                    equipmentTotal += parseFloat(checkbox.value) || 0;
+                }
+            });
+            
+            // Calculate transportation fee
+            let transportationFee = 0;
+            const transportCheckbox = document.querySelector('input[name="transportation"]:checked');
+            if (transportCheckbox) {
+                transportationFee = parseFloat(transportCheckbox.value) || 0;
+            }
+            
+            // Calculate total
+            const totalAmount = discountedServicePrice + equipmentTotal + transportationFee;
+            
+            // Update the display
+            document.getElementById('serviceFee').textContent = '₱' + servicePrice.toFixed(2);
+            document.getElementById('equipmentFee').textContent = '₱' + (equipmentTotal + transportationFee).toFixed(2);
+            document.getElementById('discountAmount').textContent = '-₱' + discountAmount.toFixed(2);
+            document.getElementById('totalAmount').textContent = '₱' + totalAmount.toFixed(2);
+        }
+
+        // Add event listeners for price calculation
+        document.getElementById('serviceType').addEventListener('change', calculatePrice);
+        document.getElementById('serviceFrequency').addEventListener('change', calculatePrice);
+
+        // Add event listeners to all checkboxes except agreeTerms
+        document.querySelectorAll('input[type="checkbox"]:not([id="agreeTerms"])').forEach(checkbox => {
+            checkbox.addEventListener('change', calculatePrice);
+        });
+
+        // Handle Terms and Conditions checkbox validation
+        document.getElementById('agreeTerms').addEventListener('change', function() {
+            if (this.checked) {
+                this.setCustomValidity('');
+            } else {
+                this.setCustomValidity('You must agree to the terms and conditions');
+            }
+        });
+
+        // Add modal close event to clear warning
+        document.getElementById('confirmationModal').addEventListener('hidden.bs.modal', function () {
+            // Clear any remaining validation styles/messages after successful booking
+            document.getElementById('bookingForm').classList.remove('was-validated');
+        });
+
+        // Form submission handler
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Manual validation for terms and conditions
+            const agreeTerms = document.getElementById('agreeTerms');
+            if (!agreeTerms.checked) {
+                agreeTerms.setCustomValidity('You must agree to the terms and conditions');
+            } else {
+                agreeTerms.setCustomValidity('');
+            }
+            
+            // Validate form
+            this.classList.add('was-validated');
+            if (!this.checkValidity()) {
+                return;
+            }
+            
+            // Get form data
+            const formData = {
+                service: document.getElementById('serviceType').options[document.getElementById('serviceType').selectedIndex].text,
+                date: document.getElementById('serviceDate').value,
+                time: document.getElementById('serviceTime').value,
+                frequency: document.getElementById('serviceFrequency').options[document.getElementById('serviceFrequency').selectedIndex].text,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                specialInstructions: document.getElementById('specialInstructions').value,
+                paymentMethod: document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text,
+                totalAmount: document.getElementById('totalAmount').textContent
+            };
+            
+            // Show confirmation
+            document.getElementById('confirmationEmail').textContent = formData.email;
+            const confirmationModal = new bootstrap.Modal(document.getElementById('confirmationModal'));
+            confirmationModal.show();
+            
+            // Here you would typically send the data to your server
+            console.log('Form submitted:', formData);
+            
+            // Reset form after submission
+            this.reset();
+            this.classList.remove('was-validated');
+            
+            // Reset price display
+            document.getElementById('serviceFee').textContent = '₱0.00';
+            document.getElementById('equipmentFee').textContent = '₱0.00';
+            document.getElementById('discountAmount').textContent = '₱0.00';
+            document.getElementById('totalAmount').textContent = '₱0.00';
+        });
+
+        // Initialize price calculation on page load
+        calculatePrice();
     </script>
 </body>
 </html>
