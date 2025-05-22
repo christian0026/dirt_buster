@@ -105,6 +105,19 @@ a {
     line-height: 1.2;
 }
 
+/* For smaller screens, you might want a smaller logo */
+@media (max-width: 991.98px) {
+    .navbar-logo {
+        height: 40px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .navbar-logo {
+        height: 35px;
+    }
+}
+
 .brand-name {
     font-size: 1.5rem;
 }
