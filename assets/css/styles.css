@@ -99,32 +99,59 @@ a {
 
 .navbar-brand {
     display: flex;
-    flex-direction: column;
-    font-weight: 700;
-    color: white;
-    line-height: 1.2;
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.brand-logo {
+    height: 40px; /* Adjust based on your logo */
+    width: auto;
+    border-radius: 50%;
+    transition: var(--transition);
 }
 
 /* For smaller screens, you might want a smaller logo */
+/* Responsive adjustments */
 @media (max-width: 991.98px) {
-    .navbar-logo {
-        height: 40px;
+    .brand-logo {
+        height: 35px;
+    }
+    .brand-name {
+        font-size: 1.3rem;
+    }
+    .brand-tagline {
+        font-size: 0.75rem;
     }
 }
 
 @media (max-width: 767.98px) {
-    .navbar-logo {
-        height: 35px;
+    .brand-logo {
+        height: 30px;
     }
+    .brand-name {
+        font-size: 1.1rem;
+    }
+    .brand-tagline {
+        display: none; /* Optional: hide tagline on mobile */
+    }
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
 }
 
 .brand-name {
     font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
 }
 
 .brand-tagline {
     font-size: 0.85rem;
     opacity: 0.9;
+    color: white;
 }
 
 .navbar-nav .nav-link {

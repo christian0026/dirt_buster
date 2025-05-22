@@ -92,21 +92,21 @@
                                             <label for="serviceType" class="form-label">Service Type*</label>
                                             <select class="form-select" id="serviceType" required>
                                                 <option value="" selected disabled>Select a service</option>
-                                                <option value="1211">Residential Cleaning (10-60 sqm) - ₱1,131.00</option>
-                                                <option value="1713">Residential Cleaning (61-80 sqm) - ₱1,596.00</option>
-                                                <option value="2356">Residential Cleaning (81-100 sqm) - ₱2,195.00</option>
-                                                <option value="1680">Deep Cleaning (10-80 sqm) - ₱1,661.00</option>
-                                                <option value="2236">Deep Cleaning (81-100 sqm) - ₱2,208.00</option>
-                                                <option value="2932">Deep Cleaning (101-120 sqm) - ₱2,828.00</option>
-                                                <option value="1402">Commercial Cleaning (10-200 sqm) - ₱1,368.00</option>
-                                                <option value="2451">Commercial Cleaning (201-350 sqm) - ₱2,384.00</option>
-                                                <option value="3733">Commercial Cleaning (351-500 sqm) - ₱3,565.00</option>
-                                                <option value="1387">Move-in/Move-out (10-100 sqm) - ₱1,357.00</option>
-                                                <option value="1993">Move-in/Move-out (101-130 sqm) - ₱1,950.00</option>
-                                                <option value="2456">Move-in/Move-out (131-150 sqm) - ₱2,402.00</option>
-                                                <option value="1290">Airbnb Cleaning (10-50 sqm) - ₱1,337.00</option>
-                                                <option value="1786">Airbnb Cleaning (51-65 sqm) - ₱1,757.00</option>
-                                                <option value="2352">Airbnb Cleaning (66-80 sqm) - ₱2,313.00</option>
+                                                <option value="1131">Residential Cleaning (10-60 sqm) - ₱1,131.00</option>
+                                                <option value="1596">Residential Cleaning (61-80 sqm) - ₱1,596.00</option>
+                                                <option value="2195">Residential Cleaning (81-100 sqm) - ₱2,195.00</option>
+                                                <option value="1661">Deep Cleaning (10-80 sqm) - ₱1,661.00</option>
+                                                <option value="2208">Deep Cleaning (81-100 sqm) - ₱2,208.00</option>
+                                                <option value="2828">Deep Cleaning (101-120 sqm) - ₱2,828.00</option>
+                                                <option value="1368">Commercial Cleaning (10-200 sqm) - ₱1,368.00</option>
+                                                <option value="2384">Commercial Cleaning (201-350 sqm) - ₱2,384.00</option>
+                                                <option value="3565">Commercial Cleaning (351-500 sqm) - ₱3,565.00</option>
+                                                <option value="1357">Move-in/Move-out (10-100 sqm) - ₱1,357.00</option>
+                                                <option value="1950">Move-in/Move-out (101-130 sqm) - ₱1,950.00</option>
+                                                <option value="2402">Move-in/Move-out (131-150 sqm) - ₱2,402.00</option>
+                                                <option value="1337">Airbnb Cleaning (10-50 sqm) - ₱1,337.00</option>
+                                                <option value="1757">Airbnb Cleaning (51-65 sqm) - ₱1,757.00</option>
+                                                <option value="2313">Airbnb Cleaning (66-80 sqm) - ₱2,313.00</option>
                                             </select>
                                             <div class="invalid-feedback">
                                                 Please select a service type.
@@ -618,7 +618,7 @@
             document.getElementById('equipmentFee').textContent = '₱' + equipmentTotal.toFixed(2);
             document.getElementById('laborFee').textContent = '₱' + laborTotal.toFixed(2);
             document.getElementById('transportationFee').textContent = '₱' + transportationFee.toFixed(2);
-            document.getElementById('discountAmount').textContent = discountAmount > 0 ? '-₱' + discountAmount.toFixed(2) : '₱0.00';
+            document.getElementById('discountAmount').textContent = '-₱' + discountAmount.toFixed(2);
             document.getElementById('totalAmount').textContent = '₱' + totalAmount.toFixed(2);
         }
 
