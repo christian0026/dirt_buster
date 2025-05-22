@@ -618,7 +618,7 @@
             document.getElementById('equipmentFee').textContent = '₱' + equipmentTotal.toFixed(2);
             document.getElementById('laborFee').textContent = '₱' + laborTotal.toFixed(2);
             document.getElementById('transportationFee').textContent = '₱' + transportationFee.toFixed(2);
-            document.getElementById('discountAmount').textContent = '-₱' + discountAmount.toFixed(2);
+            document.getElementById('discountAmount').textContent = discountAmount > 0 ? '-₱' + discountAmount.toFixed(2) : '₱0.00';
             document.getElementById('totalAmount').textContent = '₱' + totalAmount.toFixed(2);
         }
 
